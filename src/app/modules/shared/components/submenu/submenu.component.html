@@ -1,0 +1,17 @@
+
+<li [ngClass]="{ 'showMenu': submenu.isOpen }" (click)="onToggleSubmenu(submenu)">
+  <div class="iocn-link">
+    <a>
+      <i [class]="submenu.icon"></i>
+      <span class="link_name">{{ submenu.linkName }}</span>
+    </a>
+    <i class='bx bxs-chevron-down arrow'></i>
+  </div>
+  
+  <ul class="sub-menu" *ngIf="submenu.submenu">
+    <li><a class="link_name" href="#">{{ submenu.linkName }}</a></li>
+    <li *ngFor="let subItem of submenu.submenu">
+      <a [routerLink]="subItem.path">{{ subItem.title }}</a>
+    </li>
+  </ul>
+</li>

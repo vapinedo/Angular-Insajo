@@ -1,0 +1,38 @@
+<section class="animate__animated animate__fadeIn">
+
+    <article class="form-wrapper">
+
+        <div class="logo">
+            <img width="80" [src]="logo" alt="Logo">
+            <h2 class="title">{{ title }}</h2>
+        </div>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput type="text" formControlName="email">
+                <mat-error *ngIf="form.controls['email']?.invalid && (form.controls['email']?.dirty || form.controls['email']?.touched)">
+                    <span *ngIf="form.controls['email']?.errors?.['required']">Email es requerido</span>
+                    <span *ngIf="form.controls['email']?.errors?.['pattern']">Ingresa un email válido</span>
+                </mat-error>
+            </mat-form-field>       
+    
+            <mat-form-field appearance="outline">
+                <mat-label>Contraseña</mat-label>
+                <input matInput type="password" formControlName="password">
+                <mat-error *ngIf="form.controls['password']?.invalid && (form.controls['password']?.dirty || form.controls['password']?.touched)">
+                    <span *ngIf="form.controls['password']?.errors?.['required']">Contraseña es requerido</span>
+                    <span *ngIf="form.controls['password']?.errors?.['pattern']">Ingresa un email válido</span>
+                </mat-error>
+            </mat-form-field>       
+                
+            <div class="footer">
+                <button [disabled]="form.invalid" 
+                    type="submit" color="primary" mat-raised-button>Iniciar sesión</button>
+            </div>
+
+
+        </form>
+    </article>
+    
+</section>

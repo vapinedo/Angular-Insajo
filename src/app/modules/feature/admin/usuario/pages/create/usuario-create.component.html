@@ -1,0 +1,71 @@
+<article class="box animate__animated animate__fadeIn animate_faster">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+        <div class="row mb-3">
+            <mat-form-field appearance="outline" class="col">
+                <mat-label>Nombres</mat-label>
+                <input matInput type="text" formControlName="nombres" autocomplete="disabled">
+                <mat-error *ngIf="form.controls['nombres']?.invalid && (form.controls['nombres']?.dirty || form.controls['nombres']?.touched)">
+                    <span *ngIf="form.controls['nombres']?.errors?.['required']">Nombres es requerido</span>
+                    <span *ngIf="form.controls['nombres']?.errors?.['minlength']">Debe tener mímino 3 caracteres</span>
+                </mat-error>
+            </mat-form-field>       
+
+            <mat-form-field appearance="outline" class="col">
+                <mat-label>Apellidos</mat-label>
+                <input matInput type="text" formControlName="apellidos" autocomplete="disabled">
+                <mat-error *ngIf="form.controls['apellidos']?.invalid && (form.controls['apellidos']?.dirty || form.controls['apellidos']?.touched)">
+                    <span *ngIf="form.controls['apellidos']?.errors?.['required']">Apellidos es requerido</span>
+                    <span *ngIf="form.controls['apellidos']?.errors?.['minlength']">Debe tener mímino 2 caracteres</span>
+                </mat-error>
+            </mat-form-field>       
+        </div>
+
+        <div class="row mb-3">
+            <mat-form-field appearance="outline" class="col">
+                <mat-label>Email</mat-label>
+                <input matInput type="text" formControlName="email" autocomplete="disabled">
+                <mat-error *ngIf="form.controls['email']?.invalid && (form.controls['email']?.dirty || form.controls['email']?.touched)">
+                    <span *ngIf="form.controls['email']?.errors?.['required']">Email es requerido</span>
+                    <span *ngIf="form.controls['email']?.errors?.['pattern']">Ingresa un email válido</span>
+                </mat-error>
+            </mat-form-field>       
+
+            <mat-form-field appearance="outline" class="col">
+                <mat-label>Contraseña</mat-label>
+                <input matInput type="password" formControlName="password">
+                <mat-error *ngIf="form.controls['email']?.invalid && (form.controls['email']?.dirty || form.controls['email']?.touched)">
+                    <span *ngIf="form.controls['email']?.errors?.['required']">Email es requerido</span>
+                    <span *ngIf="form.controls['email']?.errors?.['pattern']">Ingresa un email válido</span>
+                </mat-error>
+            </mat-form-field>       
+        </div>
+
+        <div class="row mb-3">
+            <mat-form-field appearance="outline" class="col">
+                <mat-label>Rol</mat-label>
+                <mat-select formControlName="role" disableRipple>
+                    <mat-option *ngFor="let item of roles" [value]="item">
+                        {{ item }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>  
+
+            <mat-form-field appearance="outline" class="col">
+                <mat-label>Estado</mat-label>
+                <mat-select formControlName="estado" disableRipple>
+                    <mat-option *ngFor="let item of estados" [value]="item">
+                        {{ item }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>  
+        </div>
+
+        <div class="footer">
+            <app-spinner *ngIf="isLoading"></app-spinner>
+            <button *ngIf="!isLoading" [disabled]="form.invalid" 
+                type="submit" color="primary" mat-raised-button>Crear</button>
+        </div>
+        
+    </form>
+</article>

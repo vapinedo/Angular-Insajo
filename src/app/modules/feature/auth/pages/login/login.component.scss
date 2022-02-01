@@ -1,0 +1,46 @@
+@import './src/assets/scss/colors';
+
+section {
+
+    height: 100vh;
+    padding-top: 5rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url("../../../../../../assets/img/bg.jpg");
+
+    .form-wrapper {
+        margin: auto;
+        width: 450px;
+        padding: 2rem;
+        border-radius: 5px;
+        background-color: white;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+
+        .title {
+            color: $azul-300;
+            margin-bottom: 1em;
+            text-align: center;
+        }
+        .footer {
+            margin-top: 1.5em;
+            text-align: center;
+        }
+    }
+}
+@media (max-width: 400px) {
+    .login {
+        width: 90%;
+    }
+}
+
+.logo {
+    text-align: center;
+
+    img {
+        margin-bottom: 1rem;
+    }
+
+    .title {
+        color: $rojo-500 !important;
+    }
+}

@@ -1,0 +1,10 @@
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@import "./assets/scss/material";
+@import '~ngx-toastr/toastr.css';
+
+
+.x2 {
+    font-size: 1.5rem;
+}

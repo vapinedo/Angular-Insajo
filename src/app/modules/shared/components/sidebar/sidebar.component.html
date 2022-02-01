@@ -1,0 +1,30 @@
+<aside [ngClass]="{'close': sidebarIsClosed}">
+
+  <header class="logo-details">
+    <i class='bx bxs-graduation'></i>
+    <span class="brand logo_name">{{ title }}</span>
+  </header>
+
+  <ul class="nav-links">
+    <ng-container *ngFor="let item of menu">
+      <app-menu-item *ngIf="!item.submenu" [menuItem]="item"></app-menu-item>
+      <app-submenu *ngIf="item.submenu" [submenu]="item"></app-submenu>
+    </ng-container>
+
+    <article class="profile-details">
+      <div class="profile-content">
+        <img [src]="profileImage" alt="profile">
+      </div>
+
+      <div class="name-job">
+        <div>
+          <div class="profile_name">{{ currentUser.nombres }}</div>
+          <div class="job">{{ currentUser.role }}</div>
+        </div>
+        
+        <i (click)="onLogout()" class='bx bx-log-out logout' matTooltip="Cerrar sesión"></i>
+      </div>
+    </article>
+  </ul>
+
+</aside>

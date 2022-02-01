@@ -1,0 +1,11 @@
+
+<li>
+  <a [routerLink]="menuItem.path">
+    <i [class]="menuItem.icon"></i>
+    <span class="link_name">{{ menuItem.linkName }}</span>
+  </a>
+  
+  <ul class="sub-menu blank">
+    <li><a class="link_name" [routerLink]="menuItem.path">{{ menuItem.linkName }}</a></li>
+  </ul>
+</li>

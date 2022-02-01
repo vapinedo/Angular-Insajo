@@ -1,0 +1,28 @@
+## Features rol docente
+    - CRUD de actividades
+        - Titulo 
+        - Descripcion
+        - 
+        - Estudiantes o grados a quienes van dirigido
+        - Anexos ( PDF, Word, Excel, PowerPoint, Imagenes, Links a recursos )
+        - recibir comentarios
+        - responder comentarios 
+        - calificar actividades
+        - Buscar actividades 
+        - Actualizar actividad 
+        - Eliminar actividad
+
+## Features de Estudiantes
+    - Listar actividades
+        - descargar recursos, acceder a links
+        - comentar actividades
+        - Subir actividad resuelta
+        - Actualizar actividad
+        - Eliminar actividad 
+        - Buscar actividad 
+
+## Para admin
+    - Asignar grados al docente y estudiante
+    - Gestion de grados ( CRUD )
+    - Asignar asignaturas al docente y estudiante
+    - Gestión de Asignaturas ( CRUD )
