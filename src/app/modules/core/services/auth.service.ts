@@ -22,8 +22,8 @@ export class AuthService {
     }
     
     getRole(): string | null {
-        const item = this.storageSvc.checkExists("user");
-        if (item === null) { return null }
+        const isLogged = this.isLogged();
+        if (!isLogged) { return null }
 
         const user = this.storageSvc.read("user");
         return user.role;

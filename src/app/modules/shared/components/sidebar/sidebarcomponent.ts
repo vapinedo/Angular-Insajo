@@ -1,49 +1,39 @@
-  import { SubSink } from 'subsink';
 import { Router } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
 import { AuthService } from '@core/services/auth.service';
-import { MessageService } from '@core/services/message.service';
 import { SidebarService } from '@core/services/sidebar.service';
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent implements OnInit, OnDestroy {
+export class SidebarComponent implements OnInit {
   
   @Input() sidebarIsClosed = false;
   
-  private subscriptions = new SubSink();
-  
   menu: any;
-  title = 'Academic';
   currentUser: any;
+  title = 'Academic';
   profileImage = '../../../../../assets/img/profile.jpg';
   
   constructor(
     private router: Router,
     private authSvc: AuthService,
-    private sidebarSvc: SidebarService,
-    private messageSvc: MessageService
+    private sidebarSvc: SidebarService
   ) { 
-    this._setMenu();
+    this.getMenu();
   }
 
   ngOnInit(): void {
     this.currentUser = this.authSvc.getCurrentUser();
   }
 
-  private _setMenu() {
-    this.subscriptions.add(
-      this.sidebarSvc.getAll()
-        .subscribe({
-          next: data => {
-              this.menu = data;
-          },
-          error: err => this.messageSvc.error(err)
-        })
-    );
+  async getMenu() {
+    const menu = await this.sidebarSvc.getMenu();
+    const userRole = this.authSvc.getRole()?.toLowerCase();
+    const menuMatchRole = menu.filter(item => item.roles.includes(userRole));
+    this.menu = menuMatchRole;
   }
       
   onToggleSubmenu(item: any): void {
@@ -53,9 +43,5 @@ export class SidebarComponent implements OnInit, OnDestroy {
   onLogout(): void {
     this.authSvc.logout();
     this.router.navigate(["/auth"]);
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.unsubscribe();
   }
 }

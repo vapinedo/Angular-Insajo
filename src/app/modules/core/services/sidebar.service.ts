@@ -11,11 +11,13 @@ export class SidebarService {
 			path: '/admin/dashboard',
 			icon: 'bx bx-grid-alt',
 			linkName: 'Dashboard',
+			roles: ["admin", "docente", "estudiante"]
 		},
 		{
 			linkName: 'Usuarios',
 			icon: 'bx bx-user',
-			path: '/admin/usuarios'
+			path: '/admin/usuarios',
+			roles: ["admin"]
 		},
 		{
 			linkName: 'Docentes',
@@ -23,7 +25,8 @@ export class SidebarService {
 			submenu: [
 				{ title: 'Detalle', path: '/admin/docentes' },
 			],
-			isOpen: false
+			isOpen: false,
+			roles: ["admin", "docente"]
 		},
 		{
 			linkName: 'Estudiantes',
@@ -31,7 +34,8 @@ export class SidebarService {
 			submenu: [
 				{ title: 'Detalle', path: '/admin/estudiantes' },
 			],
-			isOpen: false
+			isOpen: false,
+			roles: ["admin", "estudiante"]
 		}
 	];
 
@@ -44,5 +48,9 @@ export class SidebarService {
         });
     }
 
-	constructor() {}
+	getMenu(): Promise<any[]> {
+		return new Promise((resolve, reject) => {
+			resolve(this.menu);
+		})
+	}
 }
