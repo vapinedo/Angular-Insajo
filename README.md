@@ -16,3 +16,4 @@ por parte de Eduardo Herrrera Rodriguez.
 - Cerrar sesión
 - CRUD de usuarios
 - Módulo de Actividades
+    - CRUD de actividades
