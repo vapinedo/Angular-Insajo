@@ -14,7 +14,7 @@ export class LoginComponent {
 
   authError = false;
   title = 'Academic - Admin';
-  logo = "../../../../../../../assets/img/logo.jpeg";
+  logo = "../../../../../../../assets/img/logo.png";
 
   form = this.formBuilder.group({
     email: [null, [

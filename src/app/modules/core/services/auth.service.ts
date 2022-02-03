@@ -28,6 +28,14 @@ export class AuthService {
         const user = this.storageSvc.read("user");
         return user.role;
     }
+
+    getEstado(): string | null {
+        const isLogged = this.isLogged();
+        if (!isLogged) { return null }
+
+        const user = this.storageSvc.read("user");
+        return user.estado;
+    }
     
     async login(email: string, password: string): Promise<boolean> {
         const request = await getDocs(collection(firebaseDB, this.collectionRef));
