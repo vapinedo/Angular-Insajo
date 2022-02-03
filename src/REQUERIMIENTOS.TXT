@@ -7,9 +7,7 @@
         - recibir comentarios
         - responder comentarios 
         - calificar actividades
-        - Buscar actividades 
-        - Actualizar actividad 
-        - Eliminar actividad
+        - Colocar fecha de caducidad de actividad
 
 ## Features de Estudiantes
     - Listar actividades

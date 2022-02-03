@@ -14,7 +14,7 @@ export class SidebarComponent implements OnInit {
   
   menu: any;
   currentUser: any;
-  title = 'Academic';
+  title = 'Academic App';
   profileImage = '../../../../../assets/img/profile.jpg';
   
   constructor(
