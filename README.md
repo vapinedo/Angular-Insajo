@@ -9,3 +9,10 @@ por parte de Eduardo Herrrera Rodriguez.
 - Firebase
 - Boostrap
 - Angular Material
+
+## Características del proyecto
+
+- Iniciar sesión
+- Cerrar sesión
+- CRUD de usuarios
+- Módulo de Actividades
