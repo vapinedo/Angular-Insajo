@@ -12,8 +12,10 @@ por parte de Eduardo Herrrera Rodriguez.
 
 ## Características del proyecto
 
-- Iniciar sesión
-- Cerrar sesión
-- CRUD de usuarios
+- Modulo de Seguridad
+    - Iniciar sesión
+    - Cerrar sesión
+    - CRUD de usuarios
+    
 - Módulo de Actividades
     - CRUD de actividades
