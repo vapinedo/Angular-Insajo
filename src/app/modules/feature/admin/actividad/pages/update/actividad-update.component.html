@@ -1,0 +1,33 @@
+<article class="box animate__animated animate__fadeIn animate_faster">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+        <mat-form-field appearance="outline" class="col">
+            <mat-label>Titulo</mat-label>
+            <input matInput type="text" formControlName="titulo" autocomplete="off">
+            <mat-error *ngIf="form.controls['titulo']?.invalid && (form.controls['titulo']?.dirty || form.controls['titulo']?.touched)">
+                <span *ngIf="form.controls['titulo']?.errors?.['required']">Título es requerido</span>
+            </mat-error>
+        </mat-form-field>       
+
+        <mat-form-field appearance="outline" class="col">
+            <mat-label>Descripción</mat-label>
+            <textarea matInput formControlName="descripcion"></textarea>
+        </mat-form-field>       
+
+        <mat-form-field appearance="outline" class="col">
+            <mat-label>Estado</mat-label>
+            <mat-select formControlName="estado" disableRipple>
+                <mat-option *ngFor="let item of estados" [value]="item">
+                    {{ item }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>  
+
+        <div class="footer">
+            <app-spinner *ngIf="isLoading"></app-spinner>
+            <button *ngIf="!isLoading" [disabled]="form.invalid" 
+                type="submit" color="primary" mat-raised-button>Actualizar</button>
+        </div>
+        
+    </form>
+</article>

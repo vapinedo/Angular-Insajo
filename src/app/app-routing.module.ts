@@ -68,6 +68,19 @@ const routes: Routes = [
         },
         loadChildren: () => import('@feature/admin/estudiante/estudiante.module')
         .then(m => m.EstudianteModule)
+      },   
+      {  
+        path: 'actividades',
+        canActivate: [AdminOrDocenteGuardService],
+        data: { 
+          title: 'Actividades',
+          breadcrumb: [
+            { label: 'Dashboard', url: '/admin/dashboard'  },
+            { label: 'Actividades', url: '' },
+          ]
+        },
+        loadChildren: () => import('@feature/admin/actividad/actividad.module')
+        .then(m => m.ActividadModule)
       }   
     ]
   },

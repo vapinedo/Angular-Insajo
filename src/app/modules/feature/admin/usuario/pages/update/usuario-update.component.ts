@@ -14,7 +14,7 @@ export class UsuarioUpdateComponent implements OnInit {
 
   usuario: any;
   isLoading = false;
-  roles = ['Super Administrador', 'Administrador', 'Docente', 'Estudiante']; 
+  roles = ['Administrador', 'Docente', 'Estudiante']; 
   estados = ['Activo', 'Inactivo', 'Temporalmente Suspendido', 'De Vacaciones'];
 
   form = this.formBuilder.group({

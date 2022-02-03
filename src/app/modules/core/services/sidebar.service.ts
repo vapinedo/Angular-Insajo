@@ -36,6 +36,15 @@ export class SidebarService {
 			],
 			isOpen: false,
 			roles: ["admin", "estudiante"]
+		},
+		{
+			linkName: 'Actividades',
+			icon: 'bx bx-task',
+			submenu: [
+				{ title: 'Admin', path: '/admin/actividades' },
+			],
+			isOpen: false,
+			roles: ["admin", "docente"]
 		}
 	];
 

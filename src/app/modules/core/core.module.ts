@@ -12,6 +12,7 @@ import { SidebarService } from './services/sidebar.service';
 import { HelpersService } from './services/helpers.service';
 import { StorageService } from './services/storage.service';
 import { DatetimeService } from './services/datetime.service';
+import { ActividadService } from './services/actividad.service';
 import { ValidatorsService } from './services/validators.service';
 import { UsuarioFirebaseService } from './services/usuario-firebase.service';
 
@@ -30,6 +31,7 @@ import { UsuarioFirebaseService } from './services/usuario-firebase.service';
     SidebarService,
     StorageService,
     DatetimeService,
+    ActividadService,
     ValidatorsService,
     UsuarioFirebaseService
   ]

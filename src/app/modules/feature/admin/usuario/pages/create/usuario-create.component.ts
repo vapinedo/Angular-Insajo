@@ -14,7 +14,7 @@ import { UsuarioFirebaseService } from '@core/services/usuario-firebase.service'
 export class UsuarioCreateComponent {
 
   isLoading = false;
-  roles = ['Super Administrador', 'Administrador', 'Docente', 'Estudiante']; 
+  roles = ['Administrador', 'Docente', 'Estudiante']; 
   estados = ['Activo', 'Inactivo', 'Temporalmente Suspendido', 'De Vacaciones'];
 
   form = this.formBuilder.group({

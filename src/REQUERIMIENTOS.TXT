@@ -2,7 +2,6 @@
     - CRUD de actividades
         - Titulo 
         - Descripcion
-        - 
         - Estudiantes o grados a quienes van dirigido
         - Anexos ( PDF, Word, Excel, PowerPoint, Imagenes, Links a recursos )
         - recibir comentarios
@@ -26,3 +25,6 @@
     - Gestion de grados ( CRUD )
     - Asignar asignaturas al docente y estudiante
     - Gestión de Asignaturas ( CRUD )
+
+## Modulo Usuarios
+    - Revisar que no entren si estan inactivos
