@@ -16,7 +16,7 @@ por parte de Eduardo Herrrera Rodriguez.
     - Iniciar sesión
     - Cerrar sesión
     - CRUD de usuarios
-    - Iniciar valida el estado del usuario ( activo )
+    - Iniciar sesión valida el estado del usuario ( activo )
     
 - Módulo de Actividades
     - CRUD de actividades
