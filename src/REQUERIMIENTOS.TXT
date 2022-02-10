@@ -1,7 +1,7 @@
 ## Features rol docente
     - CRUD de actividades
-        - Titulo 
-        - Descripcion
+        - Titulo OK
+        - Descripcion OK
         - Estudiantes o grados a quienes van dirigido
         - Anexos ( PDF, Word, Excel, PowerPoint, Imagenes, Links a recursos )
         - recibir comentarios

@@ -14,37 +14,22 @@ export class SidebarService {
 			roles: ["admin", "docente", "estudiante"]
 		},
 		{
-			linkName: 'Usuarios',
-			icon: 'bx bx-user',
 			path: '/admin/usuarios',
+			icon: 'bx bx-user',
+			linkName: 'Usuarios',
 			roles: ["admin"]
 		},
 		{
-			linkName: 'Docentes',
-			icon: 'bx bx-group',
-			submenu: [
-				{ title: 'Detalle', path: '/admin/docentes' },
-			],
-			isOpen: false,
-			roles: ["admin", "docente"]
-		},
-		{
-			linkName: 'Estudiantes',
-			icon: 'bx bxs-contact',
-			submenu: [
-				{ title: 'Detalle', path: '/admin/estudiantes' },
-			],
-			isOpen: false,
-			roles: ["admin", "estudiante"]
-		},
-		{
-			linkName: 'Actividades',
+			path: '/admin/actividades',
 			icon: 'bx bx-task',
-			submenu: [
-				{ title: 'Admin', path: '/admin/actividades' },
-			],
-			isOpen: false,
+			linkName: 'Actividades',
 			roles: ["admin", "docente"]
+		},
+		{
+			path: '/admin/grupos',
+			icon: 'bx bx-male-female',
+			linkName: 'Grupos',
+			roles: ["admin"]
 		}
 	];
 
