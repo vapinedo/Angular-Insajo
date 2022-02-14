@@ -3,19 +3,21 @@
 
         <mat-form-field appearance="outline" class="col">
             <mat-label>Grado</mat-label>
-            <input matInput type="text" formControlName="grado" autocomplete="off">
-            <mat-error *ngIf="form.controls['grado']?.invalid && (form.controls['grado']?.dirty || form.controls['grado']?.touched)">
-                <span *ngIf="form.controls['grado']?.errors?.['required']">Grado es requerido</span>
-            </mat-error>
-        </mat-form-field>       
+            <mat-select formControlName="letra" disableRipple>
+                <mat-option *ngFor="let item of grados" [value]="item.grado">
+                    {{ item.grado }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field> 
         
         <mat-form-field appearance="outline" class="col">
             <mat-label>Letra</mat-label>
-            <input matInput type="text" formControlName="letra" autocomplete="off">
-            <mat-error *ngIf="form.controls['letra']?.invalid && (form.controls['letra']?.dirty || form.controls['letra']?.touched)">
-                <span *ngIf="form.controls['letra']?.errors?.['required']">Grado es requerido</span>
-            </mat-error>
-        </mat-form-field>       
+            <mat-select formControlName="letra" disableRipple>
+                <mat-option *ngFor="let item of letras" [value]="item">
+                    {{ item }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>  
 
         <mat-form-field appearance="outline" class="col">
             <mat-label>Estado</mat-label>

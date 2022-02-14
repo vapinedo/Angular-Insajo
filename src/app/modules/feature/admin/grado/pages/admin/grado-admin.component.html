@@ -14,6 +14,11 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Grado</th>
             <td mat-cell *matCellDef="let item">{{ item?.grado | titlecase }}</td>
         </ng-container>
+
+        <ng-container matColumnDef="ordinal">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Ordinal</th>
+            <td mat-cell *matCellDef="let item">{{ item?.ordinal }}</td>
+        </ng-container>
         
         <ng-container matColumnDef="estado">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>

@@ -16,7 +16,7 @@ export class GradoAdminComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   public dataSource = new MatTableDataSource();
-  public displayedColumns: string[] = ['grado', 'estado', 'acciones'];
+  public displayedColumns: string[] = ['grado', 'ordinal', 'estado', 'acciones'];
 
   constructor(
     private messageSvc: MessageService,

@@ -14,9 +14,11 @@ export class GradoCreateComponent {
 
   isLoading = false;
   estados = ['Activo', 'Inactivo'];
+  ordinales = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
 
   form = this.formBuilder.group({
     id: [uuidv4()],
+    ordinal: [null, [Validators.required]],
     grado: [null, [Validators.required]],
     estado: [null, [Validators.required]]
   }); 

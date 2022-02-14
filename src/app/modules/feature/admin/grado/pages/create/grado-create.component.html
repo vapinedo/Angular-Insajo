@@ -8,7 +8,16 @@
                 <span *ngIf="form.controls['grado']?.errors?.['required']">Grado es requerido</span>
             </mat-error>
         </mat-form-field>       
-        
+
+        <mat-form-field appearance="outline" class="col">
+            <mat-label>Ordinal</mat-label>
+            <mat-select formControlName="ordinal" disableRipple>
+                <mat-option *ngFor="let item of ordinales" [value]="item">
+                    {{ item }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>  
+
         <mat-form-field appearance="outline" class="col">
             <mat-label>Estado</mat-label>
             <mat-select formControlName="estado" disableRipple>

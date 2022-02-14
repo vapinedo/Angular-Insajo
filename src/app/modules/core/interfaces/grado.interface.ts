@@ -1,5 +1,6 @@
 export interface GradoI {
     id?: string;
-    nombre: string;
+    grado: string;
+    ordinal: number;
     estado: string;
 }
