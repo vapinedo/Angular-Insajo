@@ -2,9 +2,9 @@ import { v4 as uuidv4 } from 'uuid';
 import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { UsuarioService } from '@core/services/usuario.service';
 import { MessageService } from '@core/services/message.service';
 import { ValidatorsService } from '@core/services/validators.service';
-import { UsuarioFirebaseService } from '@core/services/usuario-firebase.service';
 
 @Component({
   selector: 'app-usuario-create',
@@ -40,15 +40,15 @@ export class UsuarioCreateComponent {
     private router: Router,
     private formBuilder: FormBuilder,
     private messageSvc: MessageService,
+    private usuarioSvc: UsuarioService,
     private validatorsSvc: ValidatorsService,
-    private usuarioFirebaseSvc: UsuarioFirebaseService
   ) {}
 
   async onSubmit() {
     if (this.form.invalid) return;
 
     const usuario = this.form.value;
-    await this.usuarioFirebaseSvc.create(usuario);
+    await this.usuarioSvc.create(usuario);
     this.router.navigate(["/admin/usuarios"]);
     this.messageSvc.success();
   }

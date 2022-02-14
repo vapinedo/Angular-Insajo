@@ -1,0 +1,36 @@
+<article class="box animate__animated animate__fadeIn animate_faster">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+        <mat-form-field appearance="outline" class="col">
+            <mat-label>Grado</mat-label>
+            <input matInput type="text" formControlName="grado" autocomplete="off">
+            <mat-error *ngIf="form.controls['grado']?.invalid && (form.controls['grado']?.dirty || form.controls['grado']?.touched)">
+                <span *ngIf="form.controls['grado']?.errors?.['required']">Grado es requerido</span>
+            </mat-error>
+        </mat-form-field>       
+        
+        <mat-form-field appearance="outline" class="col">
+            <mat-label>Letra</mat-label>
+            <input matInput type="text" formControlName="letra" autocomplete="off">
+            <mat-error *ngIf="form.controls['letra']?.invalid && (form.controls['letra']?.dirty || form.controls['letra']?.touched)">
+                <span *ngIf="form.controls['letra']?.errors?.['required']">Grado es requerido</span>
+            </mat-error>
+        </mat-form-field>       
+
+        <mat-form-field appearance="outline" class="col">
+            <mat-label>Estado</mat-label>
+            <mat-select formControlName="estado" disableRipple>
+                <mat-option *ngFor="let item of estados" [value]="item">
+                    {{ item }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>  
+
+        <div class="footer">
+            <app-spinner *ngIf="isLoading"></app-spinner>
+            <button *ngIf="!isLoading" [disabled]="form.invalid" 
+                type="submit" color="primary" mat-raised-button>Crear</button>
+        </div>
+        
+    </form>
+</article>

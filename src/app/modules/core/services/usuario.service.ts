@@ -4,7 +4,7 @@ import { firebaseDB } from '@environments/environment';
 import { collection, doc, setDoc, getDocs, getDoc, deleteDoc, updateDoc, DocumentData } from '@firebase/firestore';
 
 @Injectable()
-export class UsuarioFirebaseService {
+export class UsuarioService {
 
     private readonly collectionRef = "usuarios";
     private readonly usuariosRef = collection(firebaseDB, "usuarios");

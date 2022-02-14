@@ -1,26 +1,26 @@
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { GradoService } from '@core/services/grado.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MessageService } from '@core/services/message.service';
-import { UsuarioService } from '@core/services/usuario.service';
 
 @Component({
-  selector: 'app-usuario-admin',
-  templateUrl: './usuario-admin.component.html',
-  styleUrls: ['./usuario-admin.component.scss']
+  selector: 'app-grado-admin',
+  templateUrl: './grado-admin.component.html',
+  styleUrls: ['./grado-admin.component.scss']
 })
-export class UsuarioAdminComponent implements OnInit {
+export class GradoAdminComponent implements OnInit {
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   public dataSource = new MatTableDataSource();
-  public displayedColumns: string[] = ['nombres', 'apellidos', 'email', 'rol', 'estado', 'acciones'];
+  public displayedColumns: string[] = ['grado', 'estado', 'acciones'];
 
   constructor(
     private messageSvc: MessageService,
-    private usuarioSvc: UsuarioService,
+    private gradoSvc: GradoService,
   ) {}
 
   ngOnInit(): void {
@@ -28,7 +28,7 @@ export class UsuarioAdminComponent implements OnInit {
   }
 
   async getDataSource(): Promise<void> {
-    const data = await this.usuarioSvc.read();
+    const data = await this.gradoSvc.read();
     this.dataSource = new MatTableDataSource(data);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -44,12 +44,12 @@ export class UsuarioAdminComponent implements OnInit {
     const { isConfirmed } = await confirm;
 
     if (isConfirmed) {
-      const usuariosArr = this.dataSource.data;
-      const deleted = await this.usuarioSvc.delete(id); 
+      const itemsArr = this.dataSource.data;
+      const deleted = await this.gradoSvc.delete(id); 
 
       if (deleted === undefined) {
-        const newUsuariosArr = usuariosArr.filter((item: any) => item.id !== id);
-        this.dataSource.data = newUsuariosArr;
+        const newItemsArr = itemsArr.filter((item: any) => item.id !== id);
+        this.dataSource.data = newItemsArr;
   
         this.messageSvc.success("Registro eliminado exitosamente");
       }

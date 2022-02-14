@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
+import { UsuarioService } from '@core/services/usuario.service';
 import { MessageService } from '@core/services/message.service';
 import { ValidatorsService } from '@core/services/validators.service';
-import { UsuarioFirebaseService } from '@core/services/usuario-firebase.service';
 
 @Component({
   selector: 'app-usuario-update',
@@ -36,15 +36,15 @@ export class UsuarioUpdateComponent implements OnInit {
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
+    private usuarioSvc: UsuarioService,
     private messageSvc: MessageService,
     private activatedRoute: ActivatedRoute,
     private validatorsSvc: ValidatorsService,
-    private usuarioFirebaseSvc: UsuarioFirebaseService
   ) {}
   
   async ngOnInit(): Promise<void> {
     const usuarioId = this.activatedRoute.snapshot.params["id"];
-    const usuario = await this.usuarioFirebaseSvc.readbyId(usuarioId);
+    const usuario = await this.usuarioSvc.readbyId(usuarioId);
     this.form.patchValue({ ...usuario });
   }
 
@@ -52,7 +52,7 @@ export class UsuarioUpdateComponent implements OnInit {
     if (this.form.invalid) return;
 
     const usuario = this.form.value;
-    await this.usuarioFirebaseSvc.update(usuario);
+    await this.usuarioSvc.update(usuario);
     this.router.navigate(["/admin/usuarios"]);
     this.messageSvc.success("Registro actualizado exitosamente");
   }

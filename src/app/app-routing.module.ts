@@ -81,6 +81,32 @@ const routes: Routes = [
         },
         loadChildren: () => import('@feature/admin/actividad/actividad.module')
         .then(m => m.ActividadModule)
+      },   
+      {  
+        path: 'grados',
+        canActivate: [AdminGuardService],
+        data: { 
+          title: 'Grados',
+          breadcrumb: [
+            { label: 'Dashboard', url: '/admin/dashboard'  },
+            { label: 'Grados', url: '' },
+          ]
+        },
+        loadChildren: () => import('@feature/admin/grado/grado.module')
+        .then(m => m.GradoModule)
+      },   
+      {  
+        path: 'grupos',
+        canActivate: [AdminGuardService],
+        data: { 
+          title: 'Grupos',
+          breadcrumb: [
+            { label: 'Dashboard', url: '/admin/dashboard'  },
+            { label: 'Grupos', url: '' },
+          ]
+        },
+        loadChildren: () => import('@feature/admin/grupo/grupo.module')
+        .then(m => m.GrupoModule)
       }   
     ]
   },
