@@ -20,6 +20,7 @@ export class GrupoCreateComponent {
 
   form = this.formBuilder.group({
     id: [uuidv4()],
+    nombre: [null],
     grado: [null, [Validators.required]],
     letra: [null, [Validators.required]],
     estado: [null, [Validators.required]]
@@ -35,15 +36,17 @@ export class GrupoCreateComponent {
     this.getGrados();
   }
 
-  private async getGrados() {
+  private async getGrados(): Promise<void> {
     this.grados = await this.gradoSvc.read();
   }
 
-  async onSubmit() {
+  async onSubmit(): Promise<void> {
     if (this.form.invalid) return;
 
-    const actividad = this.form.value;
-    await this.grupoService.create(actividad);
+    const item = this.form.value;
+    item.nombre = `${item.grado} ${item.letra}`;
+    
+    await this.grupoService.create(item);
     this.router.navigate(["/admin/grupos"]);
     this.messageSvc.success();
   }

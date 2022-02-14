@@ -16,7 +16,7 @@ export class GrupoAdminComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   public dataSource = new MatTableDataSource();
-  public displayedColumns: string[] = ['grado', 'letra', 'estado', 'acciones'];
+  public displayedColumns: string[] = ['nombre', 'estado', 'acciones'];
 
   constructor(
     private messageSvc: MessageService,

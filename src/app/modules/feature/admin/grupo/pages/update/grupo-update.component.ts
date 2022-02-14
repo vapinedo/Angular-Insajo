@@ -19,6 +19,7 @@ export class GrupoUpdateComponent implements OnInit {
 
   form = this.formBuilder.group({
     id: [null],
+    nombre: [null],
     grado: [null, [Validators.required]],
     letra: [null, [Validators.required]],
     estado: [null, [Validators.required]]
@@ -41,15 +42,17 @@ export class GrupoUpdateComponent implements OnInit {
     this.form.patchValue({ ...grupo });
   }
 
-  private async getGrados() {
+  private async getGrados(): Promise<void> {
     this.grados = await this.gradoSvc.read();
   }
 
-  async onSubmit() {
+  async onSubmit(): Promise<void> {
     if (this.form.invalid) return;
 
-    const grupo = this.form.value;
-    await this.grupoService.update(grupo);
+    const item = this.form.value;
+    item.nombre = `${item.grado} ${item.letra}`;
+
+    await this.grupoService.update(item);
     this.router.navigate(["/admin/grupos"]);
     this.messageSvc.success("Registro actualizado exitosamente");
   }
