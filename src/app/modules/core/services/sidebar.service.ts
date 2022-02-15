@@ -26,6 +26,12 @@ export class SidebarService {
 			roles: ["admin", "docente"]
 		},
 		{
+			path: '/admin/tareas',
+			icon: 'bx bx-task',
+			linkName: 'Tareas',
+			roles: ["estudiante"]
+		},
+		{
 			path: '/admin/grados',
 			icon: 'bx bx-category',
 			linkName: 'Grados',

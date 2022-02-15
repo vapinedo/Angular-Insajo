@@ -16,7 +16,7 @@ export class UsuarioAdminComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   public dataSource = new MatTableDataSource();
-  public displayedColumns: string[] = ['nombres', 'apellidos', 'email', 'rol', 'estado', 'acciones'];
+  public displayedColumns: string[] = ['nombres', 'apellidos', 'email', 'rol', 'grupo', 'estado', 'acciones'];
 
   constructor(
     private messageSvc: MessageService,

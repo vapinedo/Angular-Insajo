@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { GrupoService } from '@core/services/grupo.service';
 import { UsuarioService } from '@core/services/usuario.service';
 import { MessageService } from '@core/services/message.service';
 import { ValidatorsService } from '@core/services/validators.service';
@@ -14,12 +15,14 @@ import { ValidatorsService } from '@core/services/validators.service';
 export class UsuarioCreateComponent {
 
   isLoading = false;
+  grupos: any[] = [];
   roles = ['Administrador', 'Docente', 'Estudiante']; 
   estados = ['Activo', 'Inactivo', 'Temporalmente Suspendido', 'De Vacaciones'];
 
   form = this.formBuilder.group({
     id: [uuidv4()],
     role: [null, [Validators.required]],
+    grupo: [null],
     estado: [null, [Validators.required]],
     email: [null, [
       Validators.required,
@@ -38,17 +41,24 @@ export class UsuarioCreateComponent {
 
   constructor(
     private router: Router,
+    private grupoSvc: GrupoService,
     private formBuilder: FormBuilder,
     private messageSvc: MessageService,
     private usuarioSvc: UsuarioService,
     private validatorsSvc: ValidatorsService,
-  ) {}
+  ) {
+    this.getGrupos();
+  }
 
-  async onSubmit() {
+  private async getGrupos(): Promise<void> {
+    this.grupos = await this.grupoSvc.read();
+  }
+
+  async onSubmit(): Promise<void> {
     if (this.form.invalid) return;
 
-    const usuario = this.form.value;
-    await this.usuarioSvc.create(usuario);
+    const item = this.form.value;
+    await this.usuarioSvc.create(item);
     this.router.navigate(["/admin/usuarios"]);
     this.messageSvc.success();
   }

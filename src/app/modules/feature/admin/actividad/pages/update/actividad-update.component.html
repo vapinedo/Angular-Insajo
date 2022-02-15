@@ -16,14 +16,13 @@
 
         <mat-form-field appearance="outline" class="col">
             <mat-label>Grupo</mat-label>
-            <mat-select formControlName="grupo" disableRipple>
+            <mat-select formControlName="grupo" multiple disableRipple>
                 <mat-option *ngFor="let item of grupos" [value]="item.nombre">
                     {{ item.nombre }}
                 </mat-option>
             </mat-select>
-        </mat-form-field>  
-
-
+        </mat-form-field>
+        
         <mat-form-field appearance="outline" class="col">
             <mat-label>Estado</mat-label>
             <mat-select formControlName="estado" disableRipple>

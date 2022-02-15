@@ -29,6 +29,14 @@ export class AuthService {
         return user.role;
     }
 
+    getGrupo(): string | null {
+        const isLogged = this.isLogged();
+        if (!isLogged) { return null }
+
+        const user = this.storageSvc.read("user");
+        return user.grupo;
+    }
+
     getEstado(): string | null {
         const isLogged = this.isLogged();
         if (!isLogged) { return null }

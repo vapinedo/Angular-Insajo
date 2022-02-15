@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
+import { GrupoService } from '@core/services/grupo.service';
 import { UsuarioService } from '@core/services/usuario.service';
 import { MessageService } from '@core/services/message.service';
 import { ValidatorsService } from '@core/services/validators.service';
@@ -12,14 +13,15 @@ import { ValidatorsService } from '@core/services/validators.service';
 })
 export class UsuarioUpdateComponent implements OnInit {
 
-  usuario: any;
   isLoading = false;
+  grupos: any[] = [];
   roles = ['Administrador', 'Docente', 'Estudiante']; 
   estados = ['Activo', 'Inactivo', 'Temporalmente Suspendido', 'De Vacaciones'];
 
   form = this.formBuilder.group({
     id: [null],
     role: [null, [Validators.required]],
+    grupo: [null],
     estado: [null, [Validators.required]],
     email: [null, [
       Validators.required,
@@ -35,12 +37,15 @@ export class UsuarioUpdateComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private grupoSvc: GrupoService,
     private formBuilder: FormBuilder,
     private usuarioSvc: UsuarioService,
     private messageSvc: MessageService,
     private activatedRoute: ActivatedRoute,
     private validatorsSvc: ValidatorsService,
-  ) {}
+  ) {
+    this.getGrupos();
+  }
   
   async ngOnInit(): Promise<void> {
     const usuarioId = this.activatedRoute.snapshot.params["id"];
@@ -48,7 +53,11 @@ export class UsuarioUpdateComponent implements OnInit {
     this.form.patchValue({ ...usuario });
   }
 
-  async onSubmit() {
+  private async getGrupos(): Promise<void> {
+    this.grupos = await this.grupoSvc.read();
+  }
+
+  async onSubmit(): Promise<void> {
     if (this.form.invalid) return;
 
     const usuario = this.form.value;

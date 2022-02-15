@@ -6,6 +6,7 @@ import { AdminOrDocenteGuardService } from '@core/guards/admin-or-docente-guard.
 import { AdminOrEstudianteGuardService } from '@core/guards/admin-or-estudiante-guard.service';
 
 import { AdminLayoutComponent } from '@feature/admin/admin-layout.component';
+import { EstudianteGuardService } from '@core/guards/estudiante-guard.service';
 
 const routes: Routes = [
   {
@@ -81,6 +82,19 @@ const routes: Routes = [
         },
         loadChildren: () => import('@feature/admin/actividad/actividad.module')
         .then(m => m.ActividadModule)
+      },   
+      {  
+        path: 'tareas',
+        canActivate: [EstudianteGuardService],
+        data: { 
+          title: 'Tareas',
+          breadcrumb: [
+            { label: 'Dashboard', url: '/admin/dashboard'  },
+            { label: 'Tareas', url: '' },
+          ]
+        },
+        loadChildren: () => import('@feature/admin/tarea/tarea.module')
+        .then(m => m.TareaModule)
       },   
       {  
         path: 'grados',

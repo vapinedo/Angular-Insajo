@@ -5,34 +5,24 @@
             <mat-icon>search</mat-icon>
             <input (keyup)="applyFilter($event)" matInput #inputSearch autocomplete="off" placeholder="Buscar ...">
         </div>
-        <button routerLink="/admin/usuarios/crear" mat-raised-button color="primary">Crear nuevo</button>
+        <button mat-raised-button color="primary">Crear nuevo</button>
     </div>
 
     <table mat-table [dataSource]="dataSource" matSort class="animate__animated animate__fadeIn animate__faster">
         
-        <ng-container matColumnDef="nombres">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombres</th>
-            <td mat-cell *matCellDef="let item">{{ item?.nombres | titlecase }}</td>
+        <ng-container matColumnDef="titulo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Título</th>
+            <td mat-cell *matCellDef="let item">{{ item?.titulo | titlecase }}</td>
         </ng-container>
-        
-        <ng-container matColumnDef="apellidos">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Apellidos</th>
-            <td mat-cell *matCellDef="let item">{{ item?.apellidos }}</td>
-        </ng-container>
-        
-        <ng-container matColumnDef="email">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
-            <td mat-cell *matCellDef="let item">{{ item?.email }}</td>
-        </ng-container>
-        
-        <ng-container matColumnDef="rol">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Rol</th>
-            <td mat-cell *matCellDef="let item">{{ item?.role }}</td>
-        </ng-container>
-        
+
         <ng-container matColumnDef="grupo">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Grupo</th>
             <td mat-cell *matCellDef="let item">{{ item?.grupo }}</td>
+        </ng-container>
+        
+        <ng-container matColumnDef="descripcion">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Descripción</th>
+            <td mat-cell *matCellDef="let item">{{ item?.descripcion }}</td>
         </ng-container>
         
         <ng-container matColumnDef="estado">
@@ -43,8 +33,8 @@
         <ng-container matColumnDef="acciones">
             <th mat-header-cell *matHeaderCellDef class="text-center">Acciones</th>
             <td mat-cell *matCellDef="let item" class="tools text-center">
-                <i [routerLink]="['/admin/usuarios/editar', item.id]" title="Editar" class='bx bx-edit x2'></i>
-                <i (click)="onDelete(item.id)" title="Eliminar" class='bx bx-trash-alt x2'></i>
+                <i title="Editar" class='bx bx-edit x2'></i>
+                <i title="Eliminar" class='bx bx-trash-alt x2'></i>
             </td>
         </ng-container>
 

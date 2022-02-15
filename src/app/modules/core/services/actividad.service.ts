@@ -7,41 +7,41 @@ import { collection, doc, setDoc, getDocs, getDoc, deleteDoc, updateDoc, Documen
 @Injectable()
 export class ActividadService {
 
-    private readonly collectionRef = "actividad";
-    private readonly actividadRef = collection(firebaseDB, "actividad");
+    private readonly collectionName = "actividades";
+    private readonly collectionRef = collection(firebaseDB, "actividades");
 
     constructor(
         private httpClient: HttpClient
     ) { }
     
     async create(item: ActividadI) {   
-        return await setDoc(doc(this.actividadRef, item.id), item);
+        return await setDoc(doc(this.collectionRef, item.id), item);
     }
 
     async read(): Promise<any[]> {
-        const request = await getDocs(this.actividadRef);
+        const request = await getDocs(this.collectionRef);
         const itemList = request.docs.map(item => item.data());
         return itemList;
     }
 
     async readbyId(docId: string): Promise<DocumentData | undefined> {
-        const docRef = doc(this.actividadRef, docId);
+        const docRef = doc(this.collectionRef, docId);
         const docSnap = await getDoc(docRef);
         return docSnap.exists() ? docSnap.data() : undefined;
     }
 
     async chechExistsById(docId: string) {  
-        const docRef = doc(this.actividadRef, docId);
+        const docRef = doc(this.collectionRef, docId);
         const docSnap = await getDoc(docRef);
         return docSnap.exists() ? true : false;
     }
 
     async update(item: any) {
-        return await updateDoc(doc(this.actividadRef, item.id), item);
+        return await updateDoc(doc(this.collectionRef, item.id), item);
     }
 
     async delete(docID: string) {
-        return await deleteDoc(doc(firebaseDB, this.collectionRef, docID));
+        return await deleteDoc(doc(firebaseDB, this.collectionName, docID));
     }
 
 }

@@ -3,11 +3,13 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AuthGuardService } from './guards/auth-guard.service';
 import { AdminGuardService } from './guards/admin-guard.service';
+import { EstudianteGuardService } from './guards/estudiante-guard.service';
 import { AdminOrDocenteGuardService } from './guards/admin-or-docente-guard.service';
 import { AdminOrEstudianteGuardService } from './guards/admin-or-estudiante-guard.service';
 
 import { AuthService } from './services/auth.service';
 import { GradoService } from './services/grado.service';
+import { TareaService } from './services/tarea.service';
 import { GrupoService } from './services/grupo.service';
 import { MessageService } from './services/message.service';
 import { SidebarService } from './services/sidebar.service';
@@ -24,6 +26,7 @@ import { ValidatorsService } from './services/validators.service';
   ],
   providers: [
     AuthService,
+    TareaService,
     GrupoService,
     GradoService,
     UsuarioService,
@@ -36,6 +39,7 @@ import { ValidatorsService } from './services/validators.service';
     AuthGuardService,
     AdminGuardService,
     ValidatorsService,
+    EstudianteGuardService,
     AdminOrDocenteGuardService,
     AdminOrEstudianteGuardService,
   ]
