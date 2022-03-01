@@ -16,7 +16,7 @@ export class ActividadAdminComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   public dataSource = new MatTableDataSource();
-  public displayedColumns: string[] = ['titulo', 'grupo', 'descripcion', 'estado', 'creado_por', 'acciones'];
+  public displayedColumns: string[] = ['titulo', 'grupo', 'descripcion', 'estado', 'creado_por', 'actualizado_por', 'acciones'];
 
   constructor(
     private messageSvc: MessageService,

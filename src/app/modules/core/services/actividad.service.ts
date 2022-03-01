@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { firebaseDB } from '@environments/environment';
 import { ActividadI } from '@core/interfaces/actividad.interface';
 import { collection, doc, setDoc, getDocs, getDoc, deleteDoc, updateDoc, DocumentData } from '@firebase/firestore';
+import { UsuarioService } from './usuario.service';
 
 @Injectable()
 export class ActividadService {
@@ -11,7 +12,8 @@ export class ActividadService {
     private readonly collectionRef = collection(firebaseDB, "actividades");
 
     constructor(
-        private httpClient: HttpClient
+        private httpClient: HttpClient,
+        private usuarioSvc: UsuarioService
     ) { }
     
     async create(item: ActividadI) {   
@@ -21,8 +23,17 @@ export class ActividadService {
     async read(): Promise<any[]> {
         const request = await getDocs(this.collectionRef);
         const itemList = request.docs.map(item => item.data());
-        console.log("ItemList", itemList);
-        return itemList;
+    
+        const userList = itemList.map(async item => {
+            const userId = item["creado_por"];
+            const { nombres, apellidos } = await this.usuarioSvc.readbyId(userId);
+            item["creado_por"] = `${nombres} ${apellidos}`;
+            item["actualizado_por"] = `${nombres} ${apellidos}`;
+
+            return item;
+        });
+        const newItemList = await Promise.all(userList);
+        return newItemList;
     }
 
     async readbyId(docId: string): Promise<DocumentData | undefined> {

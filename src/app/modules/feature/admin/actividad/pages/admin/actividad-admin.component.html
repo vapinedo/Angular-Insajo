@@ -30,6 +30,11 @@
             <td mat-cell *matCellDef="let item">{{ item?.creado_por }}</td>
         </ng-container>
         
+        <ng-container matColumnDef="actualizado_por">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Actualizado Por</th>
+            <td mat-cell *matCellDef="let item">{{ item?.actualizado_por }}</td>
+        </ng-container>
+        
         <ng-container matColumnDef="estado">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
             <td mat-cell *matCellDef="let item">{{ item?.estado }}</td>

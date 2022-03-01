@@ -24,7 +24,7 @@ export class ActividadCreateComponent {
   form = this.formBuilder.group({
     id: [uuidv4()],
     descripcion: [null],
-    grupo: [null, [Validators.required]],
+    grupos: [null, [Validators.required]],
     titulo: [null, [Validators.required]],
     estado: [null, [Validators.required]],
     creado_por: [null],
@@ -44,6 +44,7 @@ export class ActividadCreateComponent {
     private actividadService: ActividadService
   ) {
     this.user = storageSvc.read("user");
+    console.log(this.user)
 
     if (this.user && this.user?.role === "Docente") {
       this.getGruposByUserId(this.user);
@@ -54,8 +55,8 @@ export class ActividadCreateComponent {
   }
 
   private async getGruposByUserId(user: any): Promise<void> {
-    const data = await this.usuarioSvc.readbyId(user.id);
-    console.log(data);
+    const { grupos } = await this.usuarioSvc.readbyId(user.id);
+    this.grupos = grupos;
   }
 
   private async getGrupos(): Promise<void> {
