@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firebaseDB } from '@environments/environment';
 import { collection, doc, setDoc, getDocs, getDoc, deleteDoc, updateDoc, DocumentData } from '@firebase/firestore';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class UsuarioService {
@@ -30,7 +31,7 @@ export class UsuarioService {
         return itemList;
     }
 
-    async readbyId(docId: string): Promise<DocumentData | undefined> {
+    async readbyId(docId: string): Promise<any> {
         const docRef = doc(firebaseDB, this.collectionRef, docId);
         const docSnap = await getDoc(docRef);
         return docSnap.exists() ? docSnap.data() : undefined;

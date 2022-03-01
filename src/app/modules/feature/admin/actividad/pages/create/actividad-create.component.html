@@ -17,8 +17,8 @@
         <mat-form-field appearance="outline" class="col">
             <mat-label>Grupo</mat-label>
             <mat-select formControlName="grupo" multiple disableRipple>
-                <mat-option *ngFor="let item of grupos" [value]="item.nombre">
-                    {{ item.nombre }}
+                <mat-option *ngFor="let item of grupos" [value]="item">
+                    {{ item }}
                 </mat-option>
             </mat-select>
         </mat-form-field>

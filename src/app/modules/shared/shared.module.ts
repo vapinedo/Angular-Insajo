@@ -15,7 +15,10 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
 import { DialogComponent } from './components/dialog/dialog.component';
 import { FileUploaderComponent } from './components/file-uploader/file-uploader.component';
 
+import { CreadoPorPipe } from '@shared/pipes/creado-por.pipe';
+
 const components = [
+  CreadoPorPipe,
   DialogComponent,
   SpinnerComponent,
   NotResultComponent,
