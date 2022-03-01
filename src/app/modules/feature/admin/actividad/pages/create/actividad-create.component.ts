@@ -18,7 +18,7 @@ export class ActividadCreateComponent {
 
   user: any;
   isLoading = false;
-  grupos: any[] = [];
+  grupos: string[] = [];
   estados = ['Activa', 'Inactiva'];
 
   form = this.formBuilder.group({
@@ -44,18 +44,24 @@ export class ActividadCreateComponent {
     private actividadService: ActividadService
   ) {
     this.user = storageSvc.read("user");
-    (this.user && this.user?.role === "Docente") 
-      ? this.getGruposByUserId(this.user)
-      : this.getGrupos(); 
+
+    if (this.user && this.user?.role === "Docente") {
+      this.getGruposByUserId(this.user);
+    } 
+    else if (this.user && this.user?.role === "Admin") {
+      this.getGrupos(); 
+    }
   }
 
   private async getGruposByUserId(user: any): Promise<void> {
-    const { grupo } = await this.usuarioSvc.readbyId(user.id);
-    this.grupos = grupo;
+    const data = await this.usuarioSvc.readbyId(user.id);
+    console.log(data);
   }
 
   private async getGrupos(): Promise<void> {
-    this.grupos = await this.grupoSvc.read();
+    const grupoListo = await this.grupoSvc.read();
+    const nombreGrupoList = grupoListo.map(item => item.nombre);
+    this.grupos = nombreGrupoList;
   }
 
   async onSubmit(): Promise<void> {
@@ -66,7 +72,7 @@ export class ActividadCreateComponent {
     actividad.actualizado_por = this.user.id;
     actividad.fecha_creacion = new Date().getTime(),
     actividad.fecha_actualizacion = new Date().getTime()
-    
+
     await this.actividadService.create(actividad);
     this.router.navigate(["/admin/actividades"]);
     this.messageSvc.success();

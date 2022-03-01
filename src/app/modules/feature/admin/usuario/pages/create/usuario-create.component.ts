@@ -15,14 +15,14 @@ import { ValidatorsService } from '@core/services/validators.service';
 export class UsuarioCreateComponent {
 
   isLoading = false;
-  grupos: any[] = [];
+  grupos: string[] = [];
   roles = ['Administrador', 'Docente', 'Estudiante']; 
   estados = ['Activo', 'Inactivo', 'Temporalmente Suspendido', 'De Vacaciones'];
 
   form = this.formBuilder.group({
     id: [uuidv4()],
     role: [null, [Validators.required]],
-    grupo: [null],
+    grupos: [null],
     estado: [null, [Validators.required]],
     email: [null, [
       Validators.required,
@@ -51,7 +51,9 @@ export class UsuarioCreateComponent {
   }
 
   private async getGrupos(): Promise<void> {
-    this.grupos = await this.grupoSvc.read();
+    const grupoListo = await this.grupoSvc.read();
+    const nombreGrupoList = grupoListo.map(item => item.nombre);
+    this.grupos = nombreGrupoList;
   }
 
   async onSubmit(): Promise<void> {

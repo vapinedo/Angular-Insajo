@@ -21,6 +21,7 @@ export class ActividadService {
     async read(): Promise<any[]> {
         const request = await getDocs(this.collectionRef);
         const itemList = request.docs.map(item => item.data());
+        console.log("ItemList", itemList);
         return itemList;
     }
 

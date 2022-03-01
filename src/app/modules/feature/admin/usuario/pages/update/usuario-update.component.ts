@@ -14,14 +14,14 @@ import { ValidatorsService } from '@core/services/validators.service';
 export class UsuarioUpdateComponent implements OnInit {
 
   isLoading = false;
-  grupos: any[] = [];
+  grupos: string[] = [];
   roles = ['Administrador', 'Docente', 'Estudiante']; 
   estados = ['Activo', 'Inactivo', 'Temporalmente Suspendido', 'De Vacaciones'];
 
   form = this.formBuilder.group({
     id: [null],
     role: [null, [Validators.required]],
-    grupo: [null],
+    grupos: [null],
     estado: [null, [Validators.required]],
     email: [null, [
       Validators.required,
@@ -54,13 +54,18 @@ export class UsuarioUpdateComponent implements OnInit {
   }
 
   private async getGrupos(): Promise<void> {
-    this.grupos = await this.grupoSvc.read();
+    const grupoListo = await this.grupoSvc.read();
+    const nombreGrupoList = grupoListo.map(item => item.nombre);
+    this.grupos = nombreGrupoList;
   }
 
   async onSubmit(): Promise<void> {
     if (this.form.invalid) return;
 
     const usuario = this.form.value;
+
+    console.log(usuario);
+
     await this.usuarioSvc.update(usuario);
     this.router.navigate(["/admin/usuarios"]);
     this.messageSvc.success("Registro actualizado exitosamente");

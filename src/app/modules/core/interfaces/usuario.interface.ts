@@ -2,7 +2,7 @@ export interface UsuarioI {
     id?: string,
     role: string,
     email: string,
-    grupo?: [],
+    grupos?: [],
     password: string
     nombres: string,
     apellidos: string,
