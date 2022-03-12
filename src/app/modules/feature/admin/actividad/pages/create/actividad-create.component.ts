@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import { Router } from '@angular/router';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '@core/services/auth.service';
 import { GrupoService } from '@core/services/grupo.service';
@@ -14,9 +14,8 @@ import { ActividadService } from '@core/services/actividad.service';
   templateUrl: './actividad-create.component.html',
   styleUrls: ['./actividad-create.component.scss']
 })
-export class ActividadCreateComponent {
+export class ActividadCreateComponent implements OnInit {
 
-  user: any;
   isLoading = false;
   grupos: string[] = [];
   estados = ['Activa', 'Inactiva'];
@@ -42,16 +41,11 @@ export class ActividadCreateComponent {
     private usuarioSvc: UsuarioService,
     private storageSvc: StorageService,
     private actividadService: ActividadService
-  ) {
-    this.user = storageSvc.read("user");
-    console.log(this.user)
+  ) {}
 
-    if (this.user && this.user?.role === "Docente") {
-      this.getGruposByUserId(this.user);
-    } 
-    else if (this.user && this.user?.role === "Admin") {
-      this.getGrupos(); 
-    }
+  ngOnInit(): void {
+    const user = this.authSvc.getCurrentUser();
+    console.log(user);
   }
 
   private async getGruposByUserId(user: any): Promise<void> {
@@ -69,8 +63,8 @@ export class ActividadCreateComponent {
     if (this.form.invalid) return;
 
     const actividad = this.form.value;
-    actividad.creado_por = this.user.id;
-    actividad.actualizado_por = this.user.id;
+    // actividad.creado_por = this.user.id;
+    // actividad.actualizado_por = this.user.id;
     actividad.fecha_creacion = new Date().getTime(),
     actividad.fecha_actualizacion = new Date().getTime()
 

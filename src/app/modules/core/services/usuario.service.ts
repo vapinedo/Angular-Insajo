@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firebaseDB } from '@environments/environment';
 import { collection, doc, setDoc, getDocs, getDoc, deleteDoc, updateDoc, DocumentData } from '@firebase/firestore';
-import { Observable } from 'rxjs';
 
 @Injectable()
 export class UsuarioService {

@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MessageService } from '@core/services/message.service';
+import { StorageService } from '@core/services/storage.service';
 import { ActividadService } from '@core/services/actividad.service';
 
 @Component({
@@ -12,6 +13,7 @@ import { ActividadService } from '@core/services/actividad.service';
 })
 export class ActividadAdminComponent implements OnInit {
 
+  user: any;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -20,18 +22,37 @@ export class ActividadAdminComponent implements OnInit {
 
   constructor(
     private messageSvc: MessageService,
-    private actividadService: ActividadService,
-  ) {}
+    private storageSvc: StorageService,
+    private actividadSvc: ActividadService,
+  ) {
+    this.user = storageSvc.read("user");
+
+    if (this.user && this.user?.role === "Docente") {
+      console.log(this.user)
+      // this.getActvidadesByUserId(this.user);
+    } 
+    else if (this.user && this.user?.role === "Admin") {
+      this.getActividades(); 
+    }
+  }
 
   ngOnInit(): void {
     this.getDataSource();
   }
 
+  private async getActvidadesByUserId(): Promise<void> {
+    const grupoListo = await this.actividadSvc.read();
+    const nombreGrupoList = grupoListo.map(item => item.nombre);
+    // this.grupos = nombreGrupoList;
+  }
+
+  private async getActividades() {
+    const grupoListo = await this.actividadSvc.read();
+  }
+
   async getDataSource(): Promise<void> {
-    const data = await this.actividadService.read();
-    this.dataSource = new MatTableDataSource(data);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    const data = await this.actividadSvc.read();
+    console.log(data)
   }
 
   applyFilter(event: Event) {
@@ -45,7 +66,7 @@ export class ActividadAdminComponent implements OnInit {
 
     if (isConfirmed) {
       const usuariosArr = this.dataSource.data;
-      const deleted = await this.actividadService.delete(id); 
+      const deleted = await this.actividadSvc.delete(id); 
 
       if (deleted === undefined) {
         const newUsuariosArr = usuariosArr.filter((item: any) => item.id !== id);

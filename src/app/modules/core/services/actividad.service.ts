@@ -36,6 +36,13 @@ export class ActividadService {
         return newItemList;
     }
 
+    async readByUserId(userId: string): Promise<any[]> {
+        const request = await getDocs(this.collectionRef);
+        const itemList = request.docs.map(item => item.data());
+        const itemListByUserId = itemList.map(item => item["creado_por"] === userId);
+        return itemListByUserId;
+    }
+
     async readbyId(docId: string): Promise<DocumentData | undefined> {
         const docRef = doc(this.collectionRef, docId);
         const docSnap = await getDoc(docRef);

@@ -62,11 +62,8 @@ export class UsuarioUpdateComponent implements OnInit {
   async onSubmit(): Promise<void> {
     if (this.form.invalid) return;
 
-    const usuario = this.form.value;
-
-    console.log(usuario);
-
-    await this.usuarioSvc.update(usuario);
+    const item = this.form.value;
+    await this.usuarioSvc.update(item);
     this.router.navigate(["/admin/usuarios"]);
     this.messageSvc.success("Registro actualizado exitosamente");
   }
