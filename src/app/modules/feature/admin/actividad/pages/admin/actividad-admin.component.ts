@@ -1,4 +1,5 @@
 import { MatSort } from '@angular/material/sort';
+import { AuthService } from '@core/services/auth.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
@@ -21,18 +22,32 @@ export class ActividadAdminComponent implements OnInit {
   public displayedColumns: string[] = ['titulo', 'grupos', 'descripcion', 'estado', 'creado_por', 'acciones'];
 
   constructor(
+    private authSvc: AuthService,
     private messageSvc: MessageService,
     private storageSvc: StorageService,
     private actividadSvc: ActividadService,
   ) {}
 
   ngOnInit(): void {
-    this.getDataSource();
+    this.user = this.authSvc.getCurrentUser();
+    const role = this.user.role.toLowerCase();
+
+    if (role === "docente") {
+      this.getDataSourceByUserId(this.user.id);
+    } else if (role === "admin") {
+      this.getDataSource();
+    }
   }
 
   async getDataSource(): Promise<void> {
     const data = await this.actividadSvc.read();
-    console.log(data)
+    this.dataSource = new MatTableDataSource(data);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  async getDataSourceByUserId(userId: string): Promise<void> {
+    const data = await this.actividadSvc.readByUserId(userId);
     this.dataSource = new MatTableDataSource(data);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;

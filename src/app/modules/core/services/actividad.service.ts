@@ -24,14 +24,7 @@ export class ActividadService {
         const request = await getDocs(this.collectionRef);
         const itemList = request.docs.map(item => item.data());
     
-        const userList = itemList.map(async item => {
-            const userId = item["creado_por"];
-            const { nombres, apellidos } = await this.usuarioSvc.readbyId(userId);
-            item["creado_por"] = `${nombres} ${apellidos}`;
-            item["actualizado_por"] = `${nombres} ${apellidos}`;
-
-            return item;
-        });
+        const userList = this.createByFromIdToString(itemList);
         const newItemList = await Promise.all(userList);
         return newItemList;
     }
@@ -39,14 +32,29 @@ export class ActividadService {
     async readByUserId(userId: string): Promise<any[]> {
         const request = await getDocs(this.collectionRef);
         const itemList = request.docs.map(item => item.data());
-        const itemListByUserId = itemList.map(item => item["creado_por"] === userId);
-        return itemListByUserId;
+        const itemListByUserId = itemList.filter(item => item["creado_por"] === userId);
+
+        const userList = this.createByFromIdToString(itemListByUserId);
+        const newItemList = await Promise.all(userList);
+        return newItemList;
     }
 
     async readbyId(docId: string): Promise<DocumentData | undefined> {
         const docRef = doc(this.collectionRef, docId);
         const docSnap = await getDoc(docRef);
         return docSnap.exists() ? docSnap.data() : undefined;
+    }
+
+    createByFromIdToString(itemList: any): any {
+        const userList = itemList.map(async (item: any) => {
+            const userId = item["creado_por"];
+            const { nombres, apellidos } = await this.usuarioSvc.readbyId(userId);
+            item["creado_por"] = `${nombres} ${apellidos}`;
+            item["actualizado_por"] = `${nombres} ${apellidos}`;
+
+            return item;
+        });
+        return userList
     }
 
     async chechExistsById(docId: string) {  
