@@ -15,9 +15,9 @@
             <td mat-cell *matCellDef="let item">{{ item?.titulo | titlecase }}</td>
         </ng-container>
         
-        <ng-container matColumnDef="grupo">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Grupo</th>
-            <td mat-cell *matCellDef="let item">{{ item?.grupo }}</td>
+        <ng-container matColumnDef="grupos">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Grupos</th>
+            <td mat-cell *matCellDef="let item">{{ item?.grupos }}</td>
         </ng-container>
         
         <ng-container matColumnDef="descripcion">
@@ -28,11 +28,6 @@
         <ng-container matColumnDef="creado_por">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Creado Por</th>
             <td mat-cell *matCellDef="let item">{{ item?.creado_por }}</td>
-        </ng-container>
-        
-        <ng-container matColumnDef="actualizado_por">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Actualizado Por</th>
-            <td mat-cell *matCellDef="let item">{{ item?.actualizado_por }}</td>
         </ng-container>
         
         <ng-container matColumnDef="estado">

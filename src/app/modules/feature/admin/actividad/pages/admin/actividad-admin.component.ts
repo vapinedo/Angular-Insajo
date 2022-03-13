@@ -18,41 +18,24 @@ export class ActividadAdminComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   public dataSource = new MatTableDataSource();
-  public displayedColumns: string[] = ['titulo', 'grupo', 'descripcion', 'estado', 'creado_por', 'actualizado_por', 'acciones'];
+  public displayedColumns: string[] = ['titulo', 'grupos', 'descripcion', 'estado', 'creado_por', 'acciones'];
 
   constructor(
     private messageSvc: MessageService,
     private storageSvc: StorageService,
     private actividadSvc: ActividadService,
-  ) {
-    this.user = storageSvc.read("user");
-
-    if (this.user && this.user?.role === "Docente") {
-      console.log(this.user)
-      // this.getActvidadesByUserId(this.user);
-    } 
-    else if (this.user && this.user?.role === "Admin") {
-      this.getActividades(); 
-    }
-  }
+  ) {}
 
   ngOnInit(): void {
     this.getDataSource();
   }
 
-  private async getActvidadesByUserId(): Promise<void> {
-    const grupoListo = await this.actividadSvc.read();
-    const nombreGrupoList = grupoListo.map(item => item.nombre);
-    // this.grupos = nombreGrupoList;
-  }
-
-  private async getActividades() {
-    const grupoListo = await this.actividadSvc.read();
-  }
-
   async getDataSource(): Promise<void> {
     const data = await this.actividadSvc.read();
     console.log(data)
+    this.dataSource = new MatTableDataSource(data);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   applyFilter(event: Event) {

@@ -16,8 +16,9 @@ import { ActividadService } from '@core/services/actividad.service';
 })
 export class ActividadCreateComponent implements OnInit {
 
+  user: any;
+  gruposList: any;
   isLoading = false;
-  grupos: string[] = [];
   estados = ['Activa', 'Inactiva'];
 
   form = this.formBuilder.group({
@@ -43,32 +44,39 @@ export class ActividadCreateComponent implements OnInit {
     private actividadService: ActividadService
   ) {}
 
-  ngOnInit(): void {
-    const user = this.authSvc.getCurrentUser();
-    console.log(user);
+  async ngOnInit(): Promise<void> {
+    this.user = this.authSvc.getCurrentUser();
+    const role = this.user.role.toLowerCase();
+
+    if (role === "docente") {
+      this.gruposList = await this.getGruposByUserId(this.user.id);
+    } else if (role === "admin") {
+      this.gruposList = await this.getGrupos();
+    }
   }
 
-  private async getGruposByUserId(user: any): Promise<void> {
-    const { grupos } = await this.usuarioSvc.readbyId(user.id);
-    this.grupos = grupos;
+  private async getGruposByUserId(id: string): Promise<void> {
+    const { grupos } = await this.usuarioSvc.readbyId(id);
+    return grupos;
   }
 
-  private async getGrupos(): Promise<void> {
-    const grupoListo = await this.grupoSvc.read();
-    const nombreGrupoList = grupoListo.map(item => item.nombre);
-    this.grupos = nombreGrupoList;
+  private async getGrupos() {
+    const grupoList = await this.grupoSvc.read();
+    const nombreGrupoList = grupoList.map(item => item.nombre);
+    return nombreGrupoList;
   }
 
   async onSubmit(): Promise<void> {
     if (this.form.invalid) return;
 
-    const actividad = this.form.value;
-    // actividad.creado_por = this.user.id;
-    // actividad.actualizado_por = this.user.id;
-    actividad.fecha_creacion = new Date().getTime(),
-    actividad.fecha_actualizacion = new Date().getTime()
+    const item = this.form.value;
 
-    await this.actividadService.create(actividad);
+    item.creado_por = this.user.id;
+    item.actualizado_por = this.user.id;
+    item.fecha_creacion = new Date().getTime(),
+    item.fecha_actualizacion = new Date().getTime()
+
+    await this.actividadService.create(item);
     this.router.navigate(["/admin/actividades"]);
     this.messageSvc.success();
   }
