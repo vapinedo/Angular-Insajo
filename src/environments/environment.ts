@@ -11,13 +11,13 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAos2CFbma6L4tOWMrqAAYhRvQSKBjK7t4",
-  authDomain: "react-insajo.firebaseapp.com",
-  projectId: "react-insajo",
-  storageBucket: "react-insajo.appspot.com",
-  messagingSenderId: "153339830729",
-  appId: "1:153339830729:web:4c501f54b80dc334190818",
-  measurementId: "G-W8KL88T9MH"
+  apiKey: "AIzaSyCLfJ03S6Tz9X0mj7_48LkUg427fWogqUY",
+  authDomain: "angular-insajo.firebaseapp.com",
+  projectId: "angular-insajo",
+  storageBucket: "angular-insajo.appspot.com",
+  messagingSenderId: "904590985003",
+  appId: "1:904590985003:web:e9a64a83910f752186276e",
+  measurementId: "G-DY12CPLTSS"
 };
 
 // Initialize Firebase
